@@ -103,14 +103,14 @@ template <class Obj, class Funct, class Arg1>
 class ObjClosure1: public ClosureInterface {
  public:
   ObjClosure1(Obj* p, Funct fun, Arg1 arg1) {
-   p_ = p;
-   fun_ = fun;
-   arg1_ = arg1;
+   p_ = p;       // 类对象指针     相当于this指针  =========这里可以借鉴!!!!!!!!!!!!!!!!!!!!!!!
+   fun_ = fun;   // 成员函数指针
+   arg1_ = arg1; // 函数参数
   }
   virtual ~ObjClosure1() {
   }
   virtual void Run() {
-    (p_->*fun_)(arg1_);
+    (p_->*fun_)(arg1_);// 类对象调用成员函数 注意这里函数是指针，需要先解引用得到函数，再调用
   }
  private:
   Obj* p_;
